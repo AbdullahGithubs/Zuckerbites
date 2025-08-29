@@ -65,4 +65,4 @@ if st.button("Create Account Instead"):
 
 if st.session_state.get("go_to_signup"):
     st.session_state.go_to_signup = False
-    st.switch_page("pages/Sign-up.py")
+    st.switch_page("pages/sign-up.py")
