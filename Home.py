@@ -4,7 +4,6 @@ import json
 import os
 from datetime import datetime
 import time
-import pytpro as py
 
 st.set_page_config(page_title="Zucker&Salzig bites", page_icon="🍪", initial_sidebar_state="expanded", layout="wide")
 
