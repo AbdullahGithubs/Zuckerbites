@@ -45,7 +45,7 @@ div[data-testid="collapsedControl"], div[data-testid="collapsedControl"] > * {
 </style>
 """, unsafe_allow_html=True)
 
-st.logo("zucker.jpeg", size="large")  # Optional: Rename image to zucker-salzig.png
+# st.logo("zucker.jpeg", size="large")  # Optional: Rename image to zucker-salzig.png
 
 # st.markdown("""
 #     <style>
