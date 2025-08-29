@@ -2,8 +2,75 @@ import streamlit as st # type: ignore
 import base64
 import time
 
-st.set_page_config(page_title="Shop", page_icon="🍪", initial_sidebar_state="expanded", layout="wide")
+st.set_page_config(
+page_title="Shop",
+page_icon="🍪",
+initial_sidebar_state="expanded",
+layout="wide"
+)
+
+def toast(x):
+    st.markdown(f"""
+    <style>
+    .toast {{
+    position: fixed;
+    top: 80px; /* below the top navbar */
+    right: 20px; /* aligned to the right */
+    width: auto;
+    max-width: 400px;
+    padding: 16px 24px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    animation: fadeout 3s ease-in-out forwards;
+    }}
+    @keyframes fadeout {{
+        0%   {{ opacity: 1; }}
+        85%  {{ opacity: 1; }}
+        100% {{ opacity: 0; }}
+    }}
+    </style>
+
+    <div class="toast">{x}</div>
+    """, unsafe_allow_html=True)
+
+
 initial_status = False
+
+st.markdown("""
+<style>
+.stButton > button {
+    border-radius: 6px;
+    border: 1px solid black;
+    text-align: center !important;
+    background-color: aliceblue;
+    color: brown;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+.stButton > button:hover {
+    background-color: darkgrey;
+    color: aliceblue;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+.stButton > button:active {
+    background-color: bisque;
+    color: aliceblue;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+.stAlert {
+    border-left: 4px solid grey;
+    border-radius: 6px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
     <style>
@@ -88,6 +155,20 @@ products = [
         "data": get_base64_image("wal'nut'.png"),
         "title": "Walnut tarts",
         "description": "Golden tarts filled with roasted walnuts, offering a rich, nutty flavor",
+        "price": 280
+    },
+    {
+        "id": "chapli",
+        "data": get_base64_image("chaplia.png"),
+        "title": "Beef chapli kabab burger",
+        "description": "Well seasoned beef chapli kabab burger with a side of fries, coleslaw and a sweetbowl",
+        "price": 280
+    },
+    {
+        "id": "biscuits'",
+        "data": get_base64_image("chapli.png"),
+        "title": "Coffee'n'Walnut biscuits",
+        "description": "Heavenly biscuits filled with a mix of coffee and walnuts",
         "price": 280
     },
 ]
@@ -187,13 +268,13 @@ for product in products:
                     "price": product["price"]
                 })
                 initial_status = True
-                st.toast(f"Adding {product['title']} to cart")
+                toast(f"Adding {product['title']} to cart")
 
 confirm_clicked = st.button("✅ Confirm Cart")
 if confirm_clicked:
     if st.session_state.cart:
         st.session_state.cart_confirmed = True
-        st.toast("Cart confirmed!")
+        toast("Cart confirmed!")
     else:
         st.warning("Your cart is empty. Please add items before confirming.")
 
